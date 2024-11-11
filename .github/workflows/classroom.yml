@@ -48,6 +48,7 @@ jobs:
         setup-command: npm install
         command: npm run test run arrays
         timeout: 10
+        max-score: 3
     - name: Test objects
       id: test-objects
       uses: classroom-resources/autograding-command-grader@v1
@@ -56,6 +57,7 @@ jobs:
         setup-command: npm install
         command: npm run test run objects
         timeout: 10
+        max-score: 6
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:

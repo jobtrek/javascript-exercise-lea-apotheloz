@@ -14,6 +14,11 @@
  */
 export function isBiggerThan2(n) {
   // Write your code here
+  if (typeof n != "number" || isNaN(n)){
+    throw new Error("it's not a number")
+  }
+  return n > 2
+  
 }
 
 /**
@@ -23,4 +28,8 @@ export function isBiggerThan2(n) {
  */
 export function isMult(n, m) {
   // Write your code here
+  if (typeof n != "number" || isNaN(n) || typeof m != "number" || isNaN(m)){
+    throw new Error("isn't a multiple")
+  }
+ return m % n && n % m === 0
 }

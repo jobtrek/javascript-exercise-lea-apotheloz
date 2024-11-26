@@ -5,6 +5,12 @@
  */
 export function reactToClickEvent() {
   // Write your code here
+//  const button = document.getElementById('click-me');
+
+  //button.addEventListener('click', function() {
+ // alert('Button clicked');
+
+
 }
 
 /**

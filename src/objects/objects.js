@@ -68,7 +68,7 @@ export function retrieveMaximumMinimumUserAges(users) {
       olderUser = user
     }
   }
-  return {younger: youngerUser.name, older: olderUser.name}
+  return { younger: youngerUser.name, older: olderUser.name }
 }
 
 /**
@@ -79,9 +79,9 @@ export function retrieveMaximumMinimumUserAges(users) {
  */
 export function parseJavaScriptObjectNotation(string) {
   // Write your code here
-  return JSON.parse(string);
-   
-  }
+  return JSON.parse(string)
+
+}
 
 
 /**

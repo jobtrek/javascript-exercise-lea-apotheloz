@@ -4,12 +4,12 @@
  * The alert text should contain "Button clicked"
  */
 export function reactToClickEvent() {
-  // Write your code here
-//  const button = document.getElementById('click-me');
+   //Write your code here
+  const button = document.getElementById('click-me');
 
-  //button.addEventListener('click', function() {
- // alert('Button clicked');
-
+  button.addEventListener('click', function() {
+  alert('Button clicked');
+})
 
 }
 
@@ -19,4 +19,11 @@ export function reactToClickEvent() {
  */
 export function addEventToDomOnClick() {
   // Write your code here
+    const button = document.querySelector('button');
+    button.addEventListener('click', function() {
+        const newDiv = document.createElement('div');
+        newDiv.textContent = 'clicked';
+        button.parentNode.insertBefore(newDiv, button.nextSibling);
+    });
 }
+

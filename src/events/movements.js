@@ -4,14 +4,21 @@
  * You need to display coordinates as follows : "x: 232, y: 332
  */
 export function mouseMovements() {
-  // Write your code here
+    // Write your code here
+    const mouse = document.getElementById('mouse-coordinates');
+
+    document.addEventListener('mousemove', (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+        mouse.textContent = `x: ${x}, y: ${y}`;
+    });
 }
 
 const randomRGB = () => {
-  const o = Math.round
-  const r = Math.random
-  const s = 255
-  return `rgba(${o(r() * s)},${o(r() * s)},${o(r() * s)})`
+    const o = Math.round
+    const r = Math.random
+    const s = 255
+    return `rgba(${o(r() * s)},${o(r() * s)},${o(r() * s)})`
 }
 let enteringColor = ''
 
@@ -25,7 +32,47 @@ let enteringColor = ''
  * Third, when you loose focus of the field, you need to reset the border color to the default one.
  */
 export function hoverFocusAndBlur() {
-  // Write your code here
+    // Write your code here
+
+    const input = document.getElementById('focus-me')
+    const label = input.previousElementSibling
+    const originalLabelText = label.textContent
+    const originalColor = getComputedStyle(input).borderColor
+    const usedColors = [originalColor]
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)]
+        }
+        return color
+    }
+
+    function getUniqueColor() {
+        let newColor
+        do {
+            newColor = getRandomColor()
+        } while (usedColors.includes(newColor))
+        usedColors.push(newColor)
+        return newColor
+    }
+
+    input.addEventListener('mouseenter', () => {
+        label.textContent = 'Yes, you hover me !'
+    })
+
+    input.addEventListener('mouseleave', () => {
+        label.textContent = originalLabelText
+    })
+
+    input.addEventListener('focus', function () {
+        this.style.borderColor = getUniqueColor()
+    })
+
+    input.addEventListener('blur', function () {
+        this.style.borderColor = originalColor
+    })
 }
 
 /**
@@ -37,5 +84,5 @@ export function hoverFocusAndBlur() {
  * Take the opportunity to also apply this colour to the text of the 2 input labels.
  */
 export function changesOnInputEvents() {
-  // Write your code here
+    // Write your code here
 }

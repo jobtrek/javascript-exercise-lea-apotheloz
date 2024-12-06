@@ -34,30 +34,24 @@ let enteringColor = ''
 export function hoverFocusAndBlur() {
     // Write your code here
     const input = document.querySelector('#focus-me')
-    input.addEventListener("mouseover", () => {
+    let alllabels = []
 
-        let labelElement = document
-            .querySelectorAll('[for="focus-me"]')
-
-        
-        function myfonction(item) {
-            item.textContent =
-                " Yes, you hover me !";
+    input.addEventListener("mouseover", (event) => {
+        const labelElement = event.target.labels
+        for ( const element of labelElement ) {
+            alllabels.push(element.textContent)
+            element.textContent = " Yes, you hover me !";
         }
-        labelElement.forEach(myfonction)
+
     })
-    input.addEventListener("mouseout", () => {
+    input.addEventListener("mouseout", (event) => {
 
-        let labelElement = document
-            .querySelectorAll('[for="focus-me"]')
-
-        function myfonction(item) {
-            item.textContent =
-                "focus me : ";
+        const labelElement = event.target.labels
+        for ( const element of labelElement ) {
+            element.textContent = alllabels.splice(0,1);
         }
-        labelElement.forEach(myfonction)
     })
-
+    
     const originalColor = getComputedStyle(input).borderColor
     const usedColors = [originalColor]
 
@@ -86,9 +80,9 @@ export function hoverFocusAndBlur() {
         } while (usedColors.includes(newColor))
         usedColors.push(newColor)
         return newColor
+
     }
 }
-
 /**
  * On the same input from the previous exercise, you need to add a new behavior :
  * Now, each new letter on the input should randomly change the default color of the input border.

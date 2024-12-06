@@ -8,7 +8,6 @@ export function displayInputContentInAlertOnEnterKey() {
     const input = document.getElementById("write-some-text");
     input.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
-            event.preventDefault();
             alert(event.target.value );
         }
     });

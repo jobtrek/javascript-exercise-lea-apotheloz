@@ -4,6 +4,9 @@
  */
 export function splitAllStringsByWordAndFilterEmptyOnes(array) {
   // Write your code here
+  return array
+    .flatMap(item => item.split(/\s+/)) 
+    .filter(word => word.length > 0)
 }
 
 /**
@@ -14,6 +17,10 @@ export function splitAllStringsByWordAndFilterEmptyOnes(array) {
  */
 export function concatenateArrays(array1, array2) {
   // Write your code here
+  for (let i= 0; i < array2.length; i++){
+    array1.push(array2[i])
+  }
+  return array1
 }
 
 /**
@@ -28,4 +35,9 @@ export function replaceElementsInArrayAtAGivenPlace(
   ...newElements
 ) {
   // Write your code here
+  let modifiedArray = array.slice();
+ for(let i= 0; i < newElements.length; i++, index++){
+  modifiedArray[index]= newElements[i];
+ }
+ return modifiedArray;
 }

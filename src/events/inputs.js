@@ -9,13 +9,10 @@ export function displayInputContentInAlertOnEnterKey() {
     input.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            alert(' keydown enter')
-
+            alert(event.target.value );
         }
     });
 }
-
-
 /**
  * On the page, you have an HTML input with the id "list-input".
  * The user can write text into it, and when he presses enter or blur the field,
@@ -49,12 +46,8 @@ export function addElementsInListOnEnterKey() {
  */
 export function removeElementsFromListWhenClicked() {
     // Write your code here
-        const list = document.querySelector("#list");
-
-        list.addEventListener('click', (event) => {
-            if (event.target.tagName === 'LI') {
-                event.target.remove();
-            }
-        })
-
+    const container = document.querySelector('#list');
+    container.addEventListener('click', (event) => {
+        event.target.remove();
+    });
 }

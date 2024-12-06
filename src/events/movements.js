@@ -33,12 +33,42 @@ let enteringColor = ''
  */
 export function hoverFocusAndBlur() {
     // Write your code here
+    const input = document.querySelector('#focus-me')
+    input.addEventListener("mouseover", () => {
 
-    const input = document.getElementById('focus-me')
-    const label = input.previousElementSibling
-    const originalLabelText = label.textContent
+        let labelElement = document
+            .querySelectorAll('[for="focus-me"]')
+
+        
+        function myfonction(item) {
+            item.textContent =
+                " Yes, you hover me !";
+        }
+        labelElement.forEach(myfonction)
+    })
+    input.addEventListener("mouseout", () => {
+
+        let labelElement = document
+            .querySelectorAll('[for="focus-me"]')
+
+        function myfonction(item) {
+            item.textContent =
+                "focus me : ";
+        }
+        labelElement.forEach(myfonction)
+    })
+
     const originalColor = getComputedStyle(input).borderColor
     const usedColors = [originalColor]
+
+
+    input.addEventListener('focus', function () {
+        this.style.borderColor = getUniqueColor()
+    })
+
+    input.addEventListener('blur', function () {
+        this.style.borderColor = originalColor
+    })
 
     function getRandomColor() {
         const letters = '0123456789ABCDEF'
@@ -57,22 +87,6 @@ export function hoverFocusAndBlur() {
         usedColors.push(newColor)
         return newColor
     }
-
-    input.addEventListener('mouseenter', () => {
-        label.textContent = 'Yes, you hover me !'
-    })
-
-    input.addEventListener('mouseleave', () => {
-        label.textContent = originalLabelText
-    })
-
-    input.addEventListener('focus', function () {
-        this.style.borderColor = getUniqueColor()
-    })
-
-    input.addEventListener('blur', function () {
-        this.style.borderColor = originalColor
-    })
 }
 
 /**
@@ -85,4 +99,34 @@ export function hoverFocusAndBlur() {
  */
 export function changesOnInputEvents() {
     // Write your code here
+    const input = document.getElementById('focus-me');
+    const labels = document.querySelectorAll('label[for="focus-me"]');
+    let originalColor = getComputedStyle(input).borderColor;
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    input.addEventListener('input', () => {
+        const newColor = getRandomColor();
+        originalColor = newColor;
+        labels.forEach(label => {
+            label.style.color = newColor;
+        });
+        if (document.activeElement !== input) {
+            input.style.borderColor = newColor;
+        }
+    });
+    const existingBlurListener = input.onblur;
+    input.onblur = function (event) {
+        if (existingBlurListener) {
+            existingBlurListener.call(this, event);
+        }
+        this.style.borderColor = originalColor;
+    };
 }

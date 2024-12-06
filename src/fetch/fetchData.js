@@ -7,4 +7,20 @@
  */
 export function fetchDataOnClick() {
   // Write your code here
+        const button = document.getElementById('click-to-fetch');
+        const displayArea = document.getElementById('display-here');
+
+        button.addEventListener('click', async () => {
+            try {
+                const response = await fetch('https://api.github.com/octocat');
+                if (!response.ok) {
+                    throw new Error(`error! status: ${response.status}`);
+                }
+                const data = await response.text();
+                displayArea.textContent = data;
+            } catch (error) {
+                console.error('Fetch error:', error);
+                displayArea.textContent = 'Error fetching data';
+            }
+        });
 }
